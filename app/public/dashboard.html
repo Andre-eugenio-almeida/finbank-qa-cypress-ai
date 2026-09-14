@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+
+<html lang="pt-BR"> <head> <meta charset="UTF-8"> <meta name="viewport" content="width=device-width, initial-scale=1.0"> <title>FinBank - Dashboard</title>
+
+<style>
+    * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+        font-family: Arial, sans-serif;
+    }
+
+    body {
+        min-height: 100vh;
+        background: #f4f6f8;
+    }
+
+    header {
+        background: #123c69;
+        color: white;
+        padding: 20px 40px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    header h1 {
+        font-size: 26px;
+    }
+
+    .logout {
+        background: white;
+        color: #123c69;
+        border: none;
+        padding: 10px 18px;
+        border-radius: 6px;
+        cursor: pointer;
+        font-weight: bold;
+    }
+
+    .container {
+        max-width: 1000px;
+        margin: 40px auto;
+        padding: 20px;
+    }
+
+    .welcome {
+        background: white;
+        padding: 30px;
+        border-radius: 12px;
+        box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+    }
+
+    .welcome h2 {
+        color: #123c69;
+        margin-bottom: 10px;
+    }
+
+    .welcome p {
+        color: #666;
+    }
+</style>
+
+</head>
+
+<body>
+
+<header>
+    <h1>FinBank</h1>
+    <button id="logout" class="logout">Sair</button>
+</header>
+
+<main class="container">
+    <section class="welcome">
+        <h2>Bem-vindo ao FinBank</h2>
+        <p id="usuario">Cliente autenticado</p>
+    </section>
+</main>
+
+<script>
+
+    const usuario = sessionStorage.getItem('usuario');
+
+    if (!usuario) {
+        window.location.href = '/';
+    } else {
+        document.getElementById('usuario').textContent =
+            `Olá, ${usuario}!`;
+    }
+
+    document.getElementById('logout').addEventListener('click', function() {
+        sessionStorage.removeItem('usuario');
+        window.location.href = '/';
+    });
+
+</script>
+
+</body> </html>
