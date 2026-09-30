@@ -78,6 +78,49 @@ describe('Dashboard - FinBank', () => {
     });
 
 
+    it('CT-017 - deve exibir o saldo disponível do usuário', () => {
+
+        cy.visit('http://localhost:3000/dashboard.html', {
+            onBeforeLoad(win) {
+                win.sessionStorage.setItem('usuario', 'Cliente FinBank');
+            }
+        });
+
+        cy.get('#saldo')
+            .should('be.visible')
+            .and('contain', 'Saldo disponível: R$ 1.000,00');
+    });
+
+
+    it('CT-018 - deve realizar transferência dentro do saldo disponível', () => {
+
+        cy.visit('http://localhost:3000/dashboard.html', {
+            onBeforeLoad(win) {
+                win.sessionStorage.setItem('usuario', 'Cliente FinBank');
+            }
+        });
+
+        cy.get('#destinatario')
+            .should('be.visible')
+            .type('98765432100');
+
+        cy.get('#valor')
+            .should('be.visible')
+            .type('500');
+
+        cy.get('#transferir')
+            .click();
+
+        cy.get('#mensagem-transferencia')
+            .should('be.visible')
+            .and('contain', 'Transferência realizada com sucesso');
+
+        cy.get('#saldo')
+            .should('be.visible')
+            .and('contain', 'Saldo disponível: R$ 500,00');
+    });
+
+
     it('CT-012 - deve realizar uma transferência com sucesso', () => {
 
         cy.visit('http://localhost:3000/dashboard.html', {
@@ -196,6 +239,68 @@ describe('Dashboard - FinBank', () => {
             .should('be.visible')
             .and('contain', 'Informe um valor válido');
     });
-    
 
+});
+
+it('CT-019 - não deve permitir transferência acima do saldo disponível', () => {
+
+    cy.visit('http://localhost:3000/dashboard.html', {
+        onBeforeLoad(win) {
+            win.sessionStorage.setItem('usuario', 'Cliente FinBank');
+        }
+    });
+
+    cy.get('#destinatario')
+        .should('be.visible')
+        .type('98765432100');
+
+    cy.get('#valor')
+        .should('be.visible')
+        .type('1500');
+
+    cy.get('#transferir')
+        .should('be.visible')
+        .click();
+
+    cy.get('#mensagem-transferencia')
+        .should('be.visible')
+        .and('contain', 'Saldo insuficiente');
+
+    cy.get('#saldo')
+        .should('be.visible')
+        .and('contain', 'Saldo disponível: R$ 1.000,00');
+});
+
+it('CT-020 - deve atualizar o saldo após múltiplas transferências', () => {
+
+    cy.visit('http://localhost:3000/dashboard.html', {
+        onBeforeLoad(win) {
+            win.sessionStorage.setItem('usuario', 'Cliente FinBank');
+        }
+    });
+
+    cy.get('#destinatario')
+        .type('98765432100');
+
+    cy.get('#valor')
+        .type('300');
+
+    cy.get('#transferir')
+        .click();
+
+    cy.get('#saldo')
+        .should('contain', 'Saldo disponível: R$ 700,00');
+
+    cy.get('#valor')
+        .clear()
+        .type('200');
+
+    cy.get('#transferir')
+        .click();
+
+    cy.get('#saldo')
+        .should('contain', 'Saldo disponível: R$ 500,00');
+
+    cy.get('#mensagem-transferencia')
+        .should('contain', 'Transferência realizada com sucesso');
 });

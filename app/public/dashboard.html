@@ -1,210 +1,220 @@
 <!DOCTYPE html>
-
 <html lang="pt-BR">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>FinBank - Dashboard</title>
 
-```
-<style>
-    * {
-        box-sizing: border-box;
-        margin: 0;
-        padding: 0;
-        font-family: Arial, sans-serif;
-    }
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
 
-    body {
-        min-height: 100vh;
-        background: #f4f6f8;
-    }
+        body {
+            min-height: 100vh;
+            background: #f4f6f8;
+        }
 
-    header {
-        background: #123c69;
-        color: white;
-        padding: 20px 40px;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-    }
+        header {
+            background: #123c69;
+            color: white;
+            padding: 20px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
 
-    header h1 {
-        font-size: 26px;
-    }
+        header h1 {
+            font-size: 26px;
+        }
 
-    .logout {
-        background: white;
-        color: #123c69;
-        border: none;
-        padding: 10px 18px;
-        border-radius: 6px;
-        cursor: pointer;
-        font-weight: bold;
-    }
+        .logout {
+            background: white;
+            color: #123c69;
+            border: none;
+            padding: 10px 18px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: bold;
+        }
 
-    .container {
-        max-width: 1000px;
-        margin: 40px auto;
-        padding: 20px;
-    }
+        .container {
+            max-width: 1000px;
+            margin: 40px auto;
+            padding: 20px;
+        }
 
-    .welcome {
-        background: white;
-        padding: 30px;
-        border-radius: 12px;
-        box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
-        margin-bottom: 25px;
-    }
+        .welcome {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+            margin-bottom: 25px;
+        }
 
-    .welcome h2 {
-        color: #123c69;
-        margin-bottom: 10px;
-    }
+        .welcome h2 {
+            color: #123c69;
+            margin-bottom: 10px;
+        }
 
-    .welcome p {
-        color: #666;
-    }
+        .welcome p {
+            color: #666;
+        }
 
-    .transferencia {
-        background: white;
-        padding: 30px;
-        border-radius: 12px;
-        box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
-    }
+        .transferencia {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+        }
 
-    .transferencia h2 {
-        color: #123c69;
-        margin-bottom: 20px;
-    }
+        .transferencia h2 {
+            color: #123c69;
+            margin-bottom: 20px;
+        }
 
-    .form-group {
-        margin-bottom: 18px;
-    }
+        .form-group {
+            margin-bottom: 18px;
+        }
 
-    .form-group label {
-        display: block;
-        margin-bottom: 6px;
-        font-weight: bold;
-        color: #333;
-    }
+        .form-group label {
+            display: block;
+            margin-bottom: 6px;
+            font-weight: bold;
+            color: #333;
+        }
 
-    .form-group input {
-        width: 100%;
-        padding: 12px;
-        border: 1px solid #ccc;
-        border-radius: 6px;
-        font-size: 15px;
-    }
+        .form-group input {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            font-size: 15px;
+        }
 
-    .btn-transferir {
-        background: #123c69;
-        color: white;
-        border: none;
-        padding: 12px 24px;
-        border-radius: 6px;
-        cursor: pointer;
-        font-weight: bold;
-        font-size: 15px;
-    }
+        .btn-transferir {
+            background: #123c69;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 15px;
+        }
 
-    .btn-transferir:hover {
-        opacity: 0.9;
-    }
+        .btn-transferir:hover {
+            opacity: 0.9;
+        }
 
-    #mensagem-transferencia {
-        margin-top: 15px;
-        font-weight: bold;
-    }
-</style>
-```
+        #mensagem-transferencia {
+            margin-top: 15px;
+            font-weight: bold;
+        }
+    </style>
 
 </head>
 
 <body>
 
-<header>
-    <h1>FinBank</h1>
-    <button id="logout" class="logout">Sair</button>
-</header>
+    <header>
+        <h1>FinBank</h1>
+        <button id="logout" class="logout">Sair</button>
+    </header>
 
-<main class="container">
+    <main class="container">
 
-```
-<section class="welcome">
-    <h2>Bem-vindo ao FinBank</h2>
-    <p id="usuario">Cliente autenticado</p>
-</section>
+        <section class="welcome">
+            <h2>Bem-vindo ao FinBank</h2>
+            <p id="usuario">Cliente autenticado</p>
+            <p id="saldo">Saldo disponível: R$ 1.000,00</p>
+        </section>
 
-<section class="transferencia">
-    <h2>Transferência</h2>
+        <section class="transferencia">
+            <h2>Transferência</h2>
 
-    <div class="form-group">
-        <label for="destinatario">CPF do destinatário</label>
-        <input
-            type="text"
-            id="destinatario"
-            placeholder="Digite o CPF do destinatário"
-        >
-    </div>
+            <div class="form-group">
+                <label for="destinatario">CPF do destinatário</label>
+                <input
+                    type="text"
+                    id="destinatario"
+                    placeholder="Digite o CPF do destinatário">
+            </div>
 
-    <div class="form-group">
-        <label for="valor">Valor</label>
-        <input
-            type="number"
-            id="valor"
-            placeholder="Digite o valor"
-            step="0.01"
-            min="0"
-        >
-    </div>
+            <div class="form-group">
+                <label for="valor">Valor</label>
+                <input
+                    type="number"
+                    id="valor"
+                    placeholder="Digite o valor"
+                    step="0.01"
+                    min="0">
+            </div>
 
-    <button id="transferir" class="btn-transferir">
-        Transferir
-    </button>
+            <button id="transferir" class="btn-transferir">
+                Transferir
+            </button>
 
-    <p id="mensagem-transferencia"></p>
-</section>
-```
+            <p id="mensagem-transferencia"></p>
 
-</main>
+        </section>
 
-<script>
+    </main>
 
-    const usuario = sessionStorage.getItem('usuario');
+    <script>
 
-    if (!usuario) {
-        window.location.href = '/';
-    } else {
-        document.getElementById('usuario').textContent =
-            `Olá, ${usuario}!`;
-    }
+        let saldo = 1000;
 
-    document.getElementById('logout').addEventListener('click', function() {
-        sessionStorage.removeItem('usuario');
-        window.location.href = '/';
-    });
+        const usuario = sessionStorage.getItem('usuario');
 
-    document.getElementById('transferir').addEventListener('click', function() {
-
-        const destinatario = document.getElementById('destinatario').value;
-        const valor = document.getElementById('valor').value;
-        const mensagem = document.getElementById('mensagem-transferencia');
-
-        if (!destinatario) {
-            mensagem.textContent = 'CPF do destinatário é obrigatório';
-            return;
+        if (!usuario) {
+            window.location.href = '/';
+        } else {
+            document.getElementById('usuario').textContent =
+                `Olá, ${usuario}!`;
         }
 
-        if (!valor || Number(valor) <= 0) {
-            mensagem.textContent = 'Informe um valor válido';
-            return;
-        }
+        document.getElementById('logout').addEventListener('click', function () {
+            sessionStorage.removeItem('usuario');
+            window.location.href = '/';
+        });
 
-        mensagem.textContent = 'Transferência realizada com sucesso';
-    });
+        document.getElementById('transferir').addEventListener('click', function () {
 
-</script>
+            const destinatario = document.getElementById('destinatario').value;
+            const valor = document.getElementById('valor').value;
+            const mensagem = document.getElementById('mensagem-transferencia');
+
+            if (!destinatario) {
+                mensagem.textContent = 'CPF do destinatário é obrigatório';
+                return;
+            }
+
+            if (!valor || Number(valor) <= 0) {
+                mensagem.textContent = 'Informe um valor válido';
+                return;
+            }
+
+            if (Number(valor) > saldo) {
+                mensagem.textContent = 'Saldo insuficiente';
+                return;
+            }
+
+            saldo -= Number(valor);
+
+            document.getElementById('saldo').textContent =
+                `Saldo disponível: R$ ${saldo.toFixed(2).replace('.', ',')}`;
+
+            mensagem.textContent = 'Transferência realizada com sucesso';
+
+        });
+
+    </script>
 
 </body>
+
 </html>
